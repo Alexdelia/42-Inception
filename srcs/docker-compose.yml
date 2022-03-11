@@ -6,6 +6,7 @@ networks:
 #volumes:
 
 services:
+# https://hub.docker.com/_/nginx
     nginx:
         container_name: nginx
         build: ./requirements/nginx
