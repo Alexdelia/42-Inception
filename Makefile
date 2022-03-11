@@ -15,10 +15,10 @@ NAME = Inception
 all:	$(NAME)
 
 $(NAME):
-	docker-compose --project-directory srcs --build up
+	docker-compose --project-directory srcs -f srcs/docker-compose.yml up --build
 
 clear:
-	docker-compose --project-directory srcs down
+	docker-compose --project-directory srcs -f srcs/docker-compose.yml down
 
 re:		clean all
 
