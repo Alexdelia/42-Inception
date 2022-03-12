@@ -3,7 +3,19 @@ version: "3.3"
 networks:
     inception:
 
-#volumes:
+volumes:
+    wordpress:
+        driver: local
+        driver_opts:
+            o: bind
+            type: none
+            device: /home/adelille/data/wordpress
+    database:
+        driver: local
+        driver_opts:
+            o: bind
+            type: none
+            device: /home/adelille/data/database
 
 services:
 # https://hub.docker.com/_/nginx
@@ -14,12 +26,21 @@ services:
 #       depends_on:
 #           - wordpress
         restart: always
-        networks: inception
+        networks:
+            - inception
         ports:
             - "443:443"
-#        volumes:
-#           -
+        volumes:
+            - wordpress:/var/www/wordpress
 
 #	wordpress:
 
-#	mariadb:
+	mariadb:
+        container_name: nginx
+        build: ./requirements/mariadb
+        image: mariadb:mariadb
+        restart: always
+        networks:
+            - inception
+        volumes:
+            - database:/var/lib/mysql
