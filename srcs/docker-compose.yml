@@ -35,7 +35,7 @@ services:
 
 #	wordpress:
 
-	mariadb:
+    mariadb:
         container_name: nginx
         build: ./requirements/mariadb
         image: mariadb:mariadb
