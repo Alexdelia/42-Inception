@@ -44,3 +44,5 @@ services:
             - inception
         volumes:
             - database:/var/lib/mysql
+        env_file:
+            - ".env"

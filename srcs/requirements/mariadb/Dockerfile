@@ -9,7 +9,7 @@ RUN		rm -rf /var/lib/mysql \
 
 #VOLUME	/var/lib/mysql
 
-COPY	conf/my.conf /etc/mysql/my.conf
+COPY	my.cnf /etc/mysql/my.cnf
 
 COPY	./entrypoint.sh /tmp/inc_mdb.sh
 #
