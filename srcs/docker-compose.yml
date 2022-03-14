@@ -23,8 +23,8 @@ services:
         container_name: nginx
         build: ./requirements/nginx
         image: nginx:nginx
-#       depends_on:
-#           - wordpress
+        depends_on:
+            - wordpress
         restart: always
         networks:
             - inception
@@ -33,7 +33,21 @@ services:
         volumes:
             - wordpress:/var/www/wordpress
 
-#	wordpress:
+    wordpress:
+        container_name: wordpress
+        build: ./requirements/wordpress
+        image: wordpress:wordpress
+        depends_on:
+            - mariadb
+        restart: always
+        networks:
+            - inception
+        ports:
+            - "9000:9000"
+        volumes:
+            - wordpress:/var/www/wordpress
+        env_file:
+            - "./.env"
 
     mariadb:
         container_name: nginx
@@ -45,4 +59,4 @@ services:
         volumes:
             - database:/var/lib/mysql
         env_file:
-            - ".env"
+            - "./.env"
