@@ -12,7 +12,19 @@
 
 NAME = Inception
 
-all:	$(NAME)
+SHELL := bash
+
+define sudotest
+	@if [[ $(shell id -u) != 0 ]]; then \
+		printf "you are not root\nplease use: sudo make\n\n"; \
+		exit 1; \
+	fi
+endef
+
+all:	launch $(NAME)
+
+launch:
+	$(call sudotest)
 
 $(NAME):
 	docker-compose --project-directory srcs -f srcs/docker-compose.yml up --build
@@ -24,4 +36,4 @@ fclean:	clean
 
 re:		clean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re launch
