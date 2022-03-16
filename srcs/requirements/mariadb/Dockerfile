@@ -7,7 +7,7 @@ RUN		rm -rf /var/lib/mysql \
 		&& chown -R mysql:mysql /var/lib/mysql /run/mysqld \
 		&& chmod 777 /var/run/mysqld
 
-#VOLUME	/var/lib/mysql
+VOLUME	/var/lib/mysql
 
 COPY	my.cnf /etc/mysql/my.cnf
 
