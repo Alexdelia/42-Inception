@@ -1,4 +1,5 @@
 FROM	debian:buster
+LABEL	maintainer="adelille@student.42.fr"
 
 RUN		apt update && apt install -y apt-utils vim mariadb-server mariadb-client
 

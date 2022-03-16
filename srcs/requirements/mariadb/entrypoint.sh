@@ -29,7 +29,7 @@ if [ ! -d $DATADIR/mysql ]; then
 	sleep 2
 
 	# backup database
-	mysql -u root -p"$ROOT_PASSWORD" wordpress < ./wordpress.sql
+	mysql -u root -p"$ROOT_PASSWORD" wordpress < ./dump.sql
 
 	sleep 2
 
