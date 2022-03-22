@@ -3,19 +3,19 @@ version: "3.3"
 networks:
     inception:
 
-volumes:
-    wordpress:
-        driver: local
-        driver_opts:
-            o: bind
-            type: none
-            device: /home/adelille/data/wordpress
-    database:
-        driver: local
-        driver_opts:
-            o: bind
-            type: none
-            device: /home/adelille/data/database
+#volumes:
+#    wordpress:
+#        driver: local
+#        driver_opts:
+#            o: bind
+#            type: none
+#            device: /home/adelille/data/wordpress
+#    database:
+#        driver: local
+#        driver_opts:
+#            o: bind
+#            type: none
+#            device: /home/adelille/data/database
 
 services:
 # https://hub.docker.com/_/nginx
@@ -32,7 +32,8 @@ services:
             - "8080:80"
             - "443:443"
         volumes:
-            - wordpress:/var/www/wordpress
+            - /home/adelille/data/wordpress:/var/www/wordpress
+ #           - wordpress:/var/www/wordpress
 
     wordpress:
         container_name: wordpress
@@ -46,18 +47,20 @@ services:
         ports:
             - "9000:9000"
         volumes:
-            - wordpress:/var/www/wordpress
+            - /home/adelille/data/wordpress:/var/www/wordpress
+#            - wordpress:/var/www/wordpress
         env_file:
             - "./.env"
 
     mariadb:
-        container_name: nginx
+        container_name: mariadb
         build: ./requirements/mariadb
         image: mariadb:mariadb
         restart: always
         networks:
             - inception
         volumes:
-            - database:/var/lib/mysql
+            - /home/adelille/data/database:/var/lib/mysql
+#            - database:/var/lib/mysql
         env_file:
             - "./.env"
