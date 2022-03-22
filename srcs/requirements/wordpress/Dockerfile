@@ -10,6 +10,6 @@ COPY	./latest.tar.gz /var/www/
 COPY	./php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
 COPY	./www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
-ENTRYPOINT	tar -xzf lastest.tar.gz && cp /wp-config.php /var/www/wordpress \
+ENTRYPOINT	tar -xzf latest.tar.gz && cp /wp-config.php /var/www/wordpress \
 	&& chown -R www-data:www-data /var/www/* && chmod -R 755 /var/www/* \
 	&& exec php-fpm7.3 -F

@@ -29,14 +29,14 @@ launch:
 $(NAME):
 	docker-compose --project-directory srcs -f srcs/docker-compose.yml up --force-recreate --build
 
-clean:
+clean: launch
 	docker-compose --project-directory srcs -f srcs/docker-compose.yml down
 
-fclean:	clean
+fclean:	launch clean
 	sudo docker rm -f $(docker ps -aq)
 	sudo docker rmi -f $(docker images -q)
 	docker builder prune
 
-re:		clean all
+re:		launch clean all
 
 .PHONY: all clean fclean re launch
