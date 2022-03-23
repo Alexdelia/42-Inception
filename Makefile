@@ -33,8 +33,8 @@ clean: launch
 	docker-compose --project-directory srcs -f srcs/docker-compose.yml down
 
 fclean:	launch clean
-	sudo docker rm -f $(docker ps -aq)
-	sudo docker rmi -f $(docker images -q)
+	-sudo docker rm -f $(sudo docker ps -aq)
+	-sudo docker rmi -f $(sudo docker images -q)
 	docker builder prune
 
 re:		launch clean all
