@@ -13,7 +13,7 @@ VOLUME	/var/lib/mysql
 COPY	my.cnf /etc/mysql/my.cnf
 
 COPY	./entrypoint.sh /tmp/inc_mdb.sh
-#
+COPY	./dump.sql ./
 
 EXPOSE	3306
 

@@ -48,4 +48,4 @@ sleep 5
 #service mysql stop
 
 printf "starting mariadb server\n"
-exec mysql -u root
+exec mysqld -u root
