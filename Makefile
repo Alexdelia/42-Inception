@@ -24,24 +24,30 @@ define sudotest
 	fi
 endef
 
+CD =	cd srcs &&
+
 all:	launch $(NAME)
 
 launch:
 	$(call sudotest)
-	cd srcs
 
 $(NAME):
-	docker-compose --project-directory srcs -f srcs/docker-compose.yml up --force-recreate --build
+	$(CD) docker-compose up --force-recreate --build
 
 clean: launch
-	docker-compose --project-directory srcs -f srcs/docker-compose.yml down
+	$(CD) docker-compose down
 
 fclean:	launch
-	docker-compose --project-directory srcs -f srcs/docker-compose.yml down -v
-	-sudo docker rm -f $(shell sudo docker ps -aq)
-	-sudo docker rmi -f $(shell sudo docker images -q)
+	$(CD) docker-compose down -v
+	-docker rm -f $(shell docker ps -aq)
+	-docker rmi -f $(shell docker images -q)
 	docker builder prune
 
 re:		launch clean all
 
-.PHONY: all clean fclean re launch
+list:	launch
+	printf "\n\tcontainer\n"
+	-docker ps -a 2>/dev/null
+	-docker images
+
+.PHONY: all clean fclean re launch list
