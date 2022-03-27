@@ -1,7 +1,7 @@
 FROM	debian:buster
 LABEL	maintainer="adelille@student.42.fr"
 
-RUN		apt-get update && apt-get install -y apt-get-utils vim mariadb-server mariadb-client
+RUN		apt update && apt install -y apt-utils vim mariadb-server mariadb-client
 
 RUN		rm -rf /var/lib/mysql \
 		&& mkdir -p /var/lib/mysql /run/mysqld \
