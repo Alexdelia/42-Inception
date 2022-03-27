@@ -6,11 +6,14 @@
 #    By: adelille <adelille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 14:54:46 by adelille          #+#    #+#              #
-#    Updated: 2022/03/16 18:44:38 by adelille         ###   ########.fr        #
+#    Updated: 2022/03/27 21:19:38 by adelille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Inception
+
+#include	srcs/.env
+#export	$(shell sed 's/=.*//' srcs/.env)
 
 SHELL := bash
 
@@ -25,6 +28,7 @@ all:	launch $(NAME)
 
 launch:
 	$(call sudotest)
+	cd srcs
 
 $(NAME):
 	docker-compose --project-directory srcs -f srcs/docker-compose.yml up --force-recreate --build
@@ -32,7 +36,8 @@ $(NAME):
 clean: launch
 	docker-compose --project-directory srcs -f srcs/docker-compose.yml down
 
-fclean:	launch clean
+fclean:	launch
+	docker-compose --project-directory srcs -f srcs/docker-compose.yml down -v
 	-sudo docker rm -f $(shell sudo docker ps -aq)
 	-sudo docker rmi -f $(shell sudo docker images -q)
 	docker builder prune
