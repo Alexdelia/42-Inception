@@ -51,22 +51,23 @@ clean: launch
 	$(CD) docker-compose down
 
 fclean:	launch
-	$(CD) docker-compose down -v
-	-docker rm -f $(shell docker ps -aq)
-	-docker rmi -f $(shell docker images -q)
-	docker builder prune
+	@$(CD) docker-compose down -v 2>/dev/null
+	@docker rm -f $(shell docker ps -aq) 2>/dev/null || true
+	@docker rmi -f $(shell docker images -q) 2>/dev/null || true
+	@docker builder prune -f
 
 re:		launch clean all
 
 list:	launch
-	printf "\n\t$(B)$(GRE)container$(D)\n"
+	@printf "\n\t$(B)$(GRE)container$(D)\n"
 	docker ps -a
-	printf "\n\t$(B)$(GRE)images$(D)\n"
+	@printf "\n\t$(B)$(GRE)images$(D)\n"
 	docker images -a
-	printf "\n\t$(B)$(GRE)network$(D)\n"
+	@printf "\n\t$(B)$(GRE)network$(D)\n"
 	docker network ls
-	printf "\n\t$(B)$(GRE)volume$(D)\n"
+	@printf "\n\t$(B)$(GRE)volume$(D)\n"
 	docker volume ls
+	@echo ;
 
 .PHONY: all clean fclean re launch list
 
