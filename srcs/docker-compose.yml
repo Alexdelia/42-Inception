@@ -33,7 +33,7 @@ services:
             - "443:443"
         volumes:
             - /home/adelille/data/wordpress:/var/www/wordpress
- #           - wordpress:/var/www/wordpress
+#            - wordpress:/var/www/wordpress
 
     wordpress:
         container_name: wordpress

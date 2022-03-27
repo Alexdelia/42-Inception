@@ -3,10 +3,10 @@
 #service mysql start
 
 # if database is not already created
-if [ ! -d $DATADIR/mysql ]; then
+if [ ! -d "$DATADIR"/mysql ]; then
 	printf "\ndatabase initialization\n\n"
 
-	mysql_install_db --datadir=$DATADIR > /dev/null
+	mysql_install_db --datadir="$DATADIR" > /dev/null
 	mysqld_safe &
 
 	sleep 2

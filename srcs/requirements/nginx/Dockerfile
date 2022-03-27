@@ -14,7 +14,7 @@ RUN		openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 	-subj "/C=FR/ST=France/L=Paris/O=42Paris/CN=adelille.42.fr" \
 	-keyout /etc/ssl/private/adelille.42.fr.key -out /etc/ssl/certs/adelille.42.fr.crt
 
-EXPOSE	80
+#EXPOSE	80
 EXPOSE	443
 
 ENTRYPOINT	["nginx", "-g", "daemon off;"]
