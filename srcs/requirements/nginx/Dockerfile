@@ -1,7 +1,7 @@
 FROM	debian:buster
 LABEL	maintainer="adelille@student.42.fr"
 
-RUN		apt update && apt install -y nginx openssl
+RUN		apt-get update && apt-get install -y nginx openssl
 
 RUN		mkdir /var/www/wordpress
 
